@@ -2,8 +2,17 @@ name: Build
 
 on:
   push:
-    tags:
-      - v*
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "**.spec.js"
+      - ".idea"
+      - ".vscode"
+      - ".dockerignore"
+      - "Dockerfile"
+      - ".gitignore"
+      - ".github/**"
+      - "!.github/workflows/build.yml"
 
 jobs:
   build:
@@ -29,8 +38,3 @@ jobs:
         run: yarn build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Release
-        uses: softprops/action-gh-release@v0.1.15
-        with:
-          files: "release/*/MagnetSearch-*.*"
