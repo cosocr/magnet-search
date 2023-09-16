@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.51.1",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.6.0",
     "@vitejs/plugin-vue": "^4.3.3",
     "autoprefixer": "^10.4.15",
