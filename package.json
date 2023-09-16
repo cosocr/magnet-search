@@ -27,7 +27,7 @@
     "tslint": "npx vue-tsc --noEmit --project tsconfig.json --strict"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.51.1",
+    "@arco-design/web-vue": "^2.51.2",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "@vitejs/plugin-vue": "^4.3.3",
