@@ -4,7 +4,7 @@ import qs from 'qs'
 // import { HttpsProxyAgent } from 'https-proxy-agent'
 
 const axios = Axios.create({
-  timeout: 20000, // 请求超时 20s
+  timeout: 10000, // 请求超时 10s
   paramsSerializer(params) {
     return qs.stringify(params, { arrayFormat: 'repeat' })
   }

@@ -1,12 +1,8 @@
 <template>
   <div>
     <a-form :model="form" @submit="handleSubmit">
-      <a-form-item label="用户代理">
-        <a-input
-          placeholder="请输入用户代理"
-          help="例如：http://127.0.0.1:7890"
-          v-model="form.proxy"
-        ></a-input>
+      <a-form-item label="用户代理" help="例如：http://127.0.0.1:7890">
+        <a-input placeholder="请输入用户代理" v-model="form.proxy"></a-input>
       </a-form-item>
       <a-form-item label="视频页地址">
         <a-input placeholder="请输入观看页面地址" v-model="form.videoUrl"></a-input>
