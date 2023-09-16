@@ -2,6 +2,8 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 
+// 跨域问题
+app.commandLine.appendSwitch('disable-web-security')
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -37,12 +39,13 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
 const preload = join(__dirname, '../preload/index.js')
-const url = process.env.VITE_DEV_SERVER_URL
+const serverUrl = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Main window',
+    title: 'MagnetSearch',
+    autoHideMenuBar: true,
     icon: join(process.env.VITE_PUBLIC, 'favicon.ico'),
     webPreferences: {
       preload,
@@ -50,12 +53,13 @@ async function createWindow() {
       // Consider using contextBridge.exposeInMainWorld
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
       nodeIntegration: true,
-      contextIsolation: false,
-    },
+      contextIsolation: false
+    }
   })
 
-  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
-    win.loadURL(url)
+  if (process.env.VITE_DEV_SERVER_URL) {
+    // electron-vite-vue#298
+    win.loadURL(serverUrl)
     // Open devTool if the app is not packaged
     win.webContents.openDevTools()
   } else {
@@ -105,13 +109,29 @@ ipcMain.handle('open-win', (_, arg) => {
     webPreferences: {
       preload,
       nodeIntegration: true,
-      contextIsolation: false,
-    },
+      contextIsolation: false
+    }
   })
 
   if (process.env.VITE_DEV_SERVER_URL) {
-    childWindow.loadURL(`${url}#${arg}`)
+    childWindow.loadURL(`${serverUrl}#${arg}`)
   } else {
     childWindow.loadFile(indexHtml, { hash: arg })
+  }
+})
+
+ipcMain.on('set-proxy', (_, args) => {
+  if (!win) {
+    return
+  }
+  if (args) {
+    win.webContents.session.setProxy({
+      mode: 'fixed_servers',
+      proxyRules: `http=${args};https=${args}`
+    })
+  } else {
+    win.webContents.session.setProxy({
+      mode: 'system'
+    })
   }
 })

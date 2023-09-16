@@ -2,17 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [main]
-    paths-ignore:
-      - "**.md"
-      - "**.spec.js"
-      - ".idea"
-      - ".vscode"
-      - ".dockerignore"
-      - "Dockerfile"
-      - ".gitignore"
-      - ".github/**"
-      - "!.github/workflows/build.yml"
+    tags:
+      - v*
 
 jobs:
   build:
@@ -32,16 +23,16 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install
+        run: yarn
 
       - name: Build Release Files
-        run: npm run build
+        run: yarn build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: release_on_${{ matrix. os }}
+          name: release_on_${{ matrix.os }}
           path: release/
           retention-days: 5

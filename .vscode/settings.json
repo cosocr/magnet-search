@@ -3,11 +3,35 @@
   "typescript.tsc.autoDetect": "off",
   "json.schemas": [
     {
-      "fileMatch": [
-        "/*electron-builder.json5",
-        "/*electron-builder.json"
-      ],
+      "fileMatch": ["/*electron-builder.json5", "/*electron-builder.json"],
       "url": "https://json.schemastore.org/electron-builder"
     }
-  ]
+  ],
+  // 保存时执行eslint
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // 从不展示扩展缩写
+  "emmet.showExpandedAbbreviation": "never",
+  // 关闭代码区域小地图
+  "editor.minimap.enabled": false,
+  // 代码过长换行
+  "editor.wordWrap": "on",
+  // 开启文件折叠
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    // 把大部分配置文件都折叠到package.json里
+    "package.json": ".*, index.html, yarn.lock, *.js, *.ts, *.json, *.sh"
+  },
+  // 隐藏某些文件或目录
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "dist-electron": true
+  }
 }

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Flexbox 布局 */
+/* Flex Direction */
+.flex-row {
+  display: flex;
+}
+.flex-row-reverse {
+  display: flex;
+}
+.flex-col {
+  display: flex;
+}
+.flex-col-reverse {
+  display: flex;
+}
+
+/* 解决arco冲突 */
+.arco-switch{
+  background-color: var(--color-fill-4);
+  -webkit-appearance:unset;
+  background-image:unset;
+}
+.arco-switch-checked {
+  background-color: rgb(var(--primary-6));
+}

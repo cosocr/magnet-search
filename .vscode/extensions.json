@@ -1,6 +1,20 @@
 {
 	"recommendations": [
 		"Vue.volar",
-		"Vue.vscode-typescript-vue-plugin"
+		"Vue.vscode-typescript-vue-plugin",
+    // editor
+    "EditorConfig.EditorConfig",
+    // prettier
+    "esbenp.prettier-vscode",
+    // eslint
+    "dbaeumer.vscode-eslint",
+    // package 包跳转
+    "ravenq.vscode-goto-node-modules",
+    // html 标签自动重命名
+    "formulahendry.auto-rename-tag",
+    // git 插件
+    "mhutchie.git-graph",
+    // tailwindcss 插件
+    "bradlc.vscode-tailwindcss"
 	]
 }
