@@ -56,6 +56,24 @@ async function createWindow() {
       contextIsolation: false
     }
   })
+  // 修改请求头
+  win.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {
+    // 在这里进行请求头的修改逻辑,伪装成源站
+    if (details.url.startsWith('http')) {
+      const url = new URL(details.url)
+      const host = `${url.protocol}//${url.host}`
+      callback({
+        cancel: false,
+        requestHeaders: {
+          ...details.requestHeaders,
+          Origin: host,
+          Referer: `${host}/`
+        }
+      })
+    } else {
+      callback({ cancel: false, requestHeaders: details.requestHeaders })
+    }
+  })
 
   if (process.env.VITE_DEV_SERVER_URL) {
     // electron-vite-vue#298

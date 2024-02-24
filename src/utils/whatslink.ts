@@ -23,9 +23,7 @@ export const whatsLinkInfo = (url: string): Promise<LinkInfo> => {
       return
     }
     axios
-      .get(`https://whatslink.info/api/v1/link?url=${url}`,{
-        headers: {'Referer': 'https://whatslink.info/'}
-      })
+      .get(`https://whatslink.info/api/v1/link?url=${url}`)
       .then((res: LinkInfo) => {
         // eslint-disable-next-line no-console
         console.log('whatLink:', res)
